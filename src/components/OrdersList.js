@@ -22,7 +22,9 @@ const OrdersList = () => {
   return (
     <Box data-testid="orders_list">
       {loading ? (
-        <CircularProgress />
+        <Box textAlign="center" height="100vh" display="flex" alignItems="center" justifyContent="center">
+          <CircularProgress size={30} />
+        </Box>
       ) : (
         <>
           <Header allOrders={allOrders} />
