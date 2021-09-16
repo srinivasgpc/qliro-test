@@ -1,9 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useTheme, makeStyles } from "@material-ui/core/styles"
-import IconButton from "@material-ui/core/IconButton"
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
+import { Button } from "@material-ui/core"
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -17,6 +15,10 @@ function TablePaginationActions(props) {
   const theme = useTheme()
   const { count, page, rowsPerPage, onChangePage } = props
 
+  const handleFirstPageButtonClick = (event) => {
+    onChangePage(event, 0)
+  }
+
   const handleBackButtonClick = (event) => {
     onChangePage(event, page - 1)
   }
@@ -25,14 +27,32 @@ function TablePaginationActions(props) {
     onChangePage(event, page + 1)
   }
 
+  const handlePageChange = (event, page) => {
+    onChangePage(event, page)
+  }
+  const numbers = count / rowsPerPage
+  let arr = []
+  for (let i = 1; i <= numbers; i++) {
+    arr.push(i)
+  }
+
   return (
     <div className={classes.root}>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        {theme.direction === "rtl" ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-      </IconButton>
-      <IconButton onClick={handleNextButtonClick} disabled={page >= Math.ceil(count / rowsPerPage) - 1} aria-label="next page">
-        {theme.direction === "rtl" ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-      </IconButton>
+      <Button className="icon_button" onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
+        {theme.direction === "rtl" ? "Next" : "Back"}
+      </Button>
+      {arr &&
+        arr.map((x, i) => {
+          const buttonClassActive = page === i ? " icon_button_active" : "icon_button_inactive"
+          return (
+            <Button className={"icon_button " + buttonClassActive} key={i} onClick={(e) => handlePageChange(e, i)}>
+              {x}
+            </Button>
+          )
+        })}
+      <Button className={"icon_button"} onClick={handleNextButtonClick} disabled={page >= Math.ceil(count / rowsPerPage) - 1} aria-label="next page">
+        {theme.direction === "rtl" ? "Back" : "Next"}
+      </Button>
     </div>
   )
 }

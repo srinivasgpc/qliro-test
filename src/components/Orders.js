@@ -181,7 +181,7 @@ const Orders = ({ allOrders }) => {
           <TableFooter>
             <TableRow>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                rowsPerPageOptions={[]}
                 colSpan={7}
                 count={tabledata.length}
                 rowsPerPage={rowsPerPage}
