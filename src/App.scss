@@ -184,4 +184,23 @@
     color: #222222 !important;
     font-weight: 600 !important;
   }
+  & .MuiTablePagination-caption {
+    display: none;
+  }
+  & .icon_button,
+  & .icon_button:hover {
+    background-color: transparent;
+    min-width: 40px;
+    border-radius: 50%;
+  }
+  & .icon_button_active,
+  & .icon_button_active:hover {
+    margin: 0 10px;
+    background-color: #0a8f74;
+    color: white;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+  }
 }
